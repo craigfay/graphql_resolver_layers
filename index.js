@@ -59,8 +59,9 @@ const typeDefs = gql`
   }
 `;
 
-// Defining the default GraphQL resolvers
-const resolvers = {
+// Defining the default GraphQL resolvers, responsible only for using input
+// to retrieve data.
+const dataAccess = {
   Query: {
     authenticate: (parent, args, context, info) => {
       // finding an author that belongs to the given credentials
@@ -135,7 +136,7 @@ function stackResolvers(layers) {
         ...layer(stack).Query,
       }
     }
-  }, resolvers);
+  }, dataAccess);
 }
 
 // Defining the HTTP server
